@@ -71,7 +71,9 @@ namespace Exceptionless.Core {
         public bool DisableIndexConfiguration { get; set; }
 
         public string ElasticSearchConnectionString { get; private set; }
-
+        public bool ElasticsearchUseBasicAuthentication { get; private set; }
+        public string ElasticsearchBasicAuthUserName { get; private set; }
+        public string ElasticsearchBasicAuthPassword { get; private set; }
         public int ElasticSearchNumberOfShards { get; private set; }
 
         public int ElasticSearchNumberOfReplicas { get; private set; }
@@ -225,6 +227,9 @@ namespace Exceptionless.Core {
             DisableIndexConfiguration = GetBool(nameof(DisableIndexConfiguration));
             DisableSnapshotJobs = GetBool(nameof(DisableSnapshotJobs), !String.IsNullOrEmpty(AppScopePrefix));
             ElasticSearchConnectionString = GetConnectionString(nameof(ElasticSearchConnectionString));
+            ElasticsearchUseBasicAuthentication= GetBool(nameof(ElasticsearchUseBasicAuthentication), false);
+            ElasticsearchBasicAuthUserName = GetString(nameof(ElasticsearchBasicAuthUserName), (string)null);
+            ElasticsearchBasicAuthPassword = GetString(nameof(ElasticsearchBasicAuthPassword) ,(string)null);
             ElasticSearchNumberOfShards = GetInt(nameof(ElasticSearchNumberOfShards), 1);
             ElasticSearchNumberOfReplicas = GetInt(nameof(ElasticSearchNumberOfReplicas), 0);
             EnableElasticsearchMapperSizePlugin = GetBool(nameof(EnableElasticsearchMapperSizePlugin));

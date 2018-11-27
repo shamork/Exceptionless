@@ -55,6 +55,9 @@ namespace Exceptionless.Core.Repositories.Configuration {
                 .DefaultTypeNameInferrer(p => p.Name.ToLowerUnderscoredWords())
                 .DefaultFieldNameInferrer(p => p.ToLowerUnderscoredWords())
                 .MaximumRetries(5);
+            if (Settings.Current.ElasticsearchUseBasicAuthentication) {
+                settings.BasicAuthentication(Settings.Current.ElasticsearchBasicAuthUserName, Settings.Current.ElasticsearchBasicAuthPassword);
+            }
         }
     }
 
